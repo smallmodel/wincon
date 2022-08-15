@@ -1,0 +1,3 @@
+<Hive Name="SECURITY" HostRoot="HKLM" HostPath="SECURITY">
+    <!-- The hive content will be built by Lsa -->
+</Hive>

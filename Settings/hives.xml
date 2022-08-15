@@ -1,0 +1,7 @@
+<Hives>
+    <Hive Target=".\Hives\defaultuser_default.xml" />
+    <Hive Target=".\Hives\sam_default.xml" />
+    <Hive Target=".\Hives\security_default.xml" />
+    <Hive Target=".\Hives\software_default.xml" />
+    <Hive Target=".\Hives\system_default.xml" />
+</Hives>

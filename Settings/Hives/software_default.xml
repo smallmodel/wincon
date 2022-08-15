@@ -1,0 +1,25 @@
+<Hive Name="SOFTWARE" HostRoot="HKLM" HostPath="SOFTWARE">
+	<!-- Required RPC settings -->
+	<HostKey Path="\Microsoft\Rpc" />
+
+	<!-- Use the Windows version from the host -->
+	<!-- Container won't start without these values -->
+	<Key Path="\Microsoft\Windows NT\CurrentVersion">
+		<HostValue Name="CurrentBuildNumber" />
+		<HostValue Name="UBR" />
+		<HostValue Name="EditionID" />
+	</Key>
+
+	<!-- Not sure if it's really needed, but the system loads these settings for GUI processes -->
+	<HostKey Path="\Microsoft\Windows NT\CurrentVersion\GRE_Initialize" />
+
+	<!-- Required for the system to start, doesn't need to have any subkey/value -->
+	<Key Path="\Microsoft\Windows NT\CurrentVersion\IniFileMapping" />
+
+	<!-- Required service stuff -->
+	<HostKey Path="\Microsoft\Windows NT\CurrentVersion\Svchost" />
+	
+	<!-- Required SxS data from the host -->
+	<HostKey Path="\Microsoft\Windows\CurrentVersion\SideBySide" />
+	<HostKey Path="\Microsoft\Windows\CurrentVersion\SMI" />
+</Hive>

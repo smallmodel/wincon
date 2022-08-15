@@ -1,0 +1,41 @@
+<FileGroup Name="Default">
+    <HostSxs NamePart="amd64_hyperv-compute">
+        <File Path="\CExecSvc.exe" Target="\Windows\system32\CExecSvc.exe" />
+    </HostSxs>
+
+    <HostDirectory Path="\Program Files">
+        <Component Name="amd64_microsoft-windows" />
+        <Component Name="wow64_microsoft-windows" />
+    </HostDirectory>
+
+    <HostDirectory Path="\Program Files (x86)">
+        <Component Name="wow64_microsoft-windows" />
+        <Component Name="x86_microsoft-windows" />
+    </HostDirectory>
+
+    <HostDirectory Path="\ProgramData">
+        <Component Name="amd64_microsoft-windows" />
+        <Component Name="wow64_microsoft-windows" />
+        <Component Name="x86_microsoft-windows" />
+    </HostDirectory>
+
+    <HostDirectory Path="\Windows">
+        <!-- Base system files -->
+        <Component Name="amd64_microsoft-windows" />
+        <Component Name="wow64_microsoft-windows" />
+        <Component Name="x86_microsoft-windows" />
+        <!-- Required for services.exe to work -->
+        <Component Name="amd64_microsoft-onecore-pnp" />
+    </HostDirectory>
+
+    <!-- Link the entire SxS folder -->
+    <HostDirectory Path="\Windows\WinSxS" />
+
+    <!-- The CatRoot directory is necessary to start the container -->
+    <HostDirectory Path="\Windows\system32\CatRoot" />
+
+    <!-- Link to WOW64 system libraries -->
+    <HostFile Path="\Windows\SysWOW64\ntdll.dll" />
+    <HostFile Path="\Windows\SysWOW64\verifier.dll" />
+    <HostFile Path="\Windows\SysWOW64\win32u.dll" />
+</FileGroup>

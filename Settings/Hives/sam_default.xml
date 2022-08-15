@@ -1,0 +1,3 @@
+<Hive Name="SAM" HostRoot="HKLM" HostPath="SAM">
+    <!-- The hive content will be built by Lsa -->
+</Hive>

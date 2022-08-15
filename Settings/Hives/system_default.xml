@@ -1,0 +1,119 @@
+<Hive Name="SYSTEM" HostRoot="HKLM" HostPath="SYSTEM">
+    <HostKey Path="\ControlSet001\Control\Cryptography" />
+
+    <!-- LSA -->
+    <Key Path="\ControlSet001\Control\Lsa">
+        <HostValue Name="Authentication Packages" />
+        <!-- This is required to be able to generate the SECURITY/SAM database on system startup -->
+        <Value Name="CreatePolicyDatabaseOnFirstBoot" DataType="REG_DWORD" Data="1" />
+    </Key>
+
+    <!-- LSA will error out without those keys -->
+    <HostKey Path="\ControlSet001\Control\Lsa\AccessProviders" />
+    <Key Path="\ControlSet001\Control\Lsa\CentralizedAccessPolicies">
+        <Value Name="MaxDataSize" DataType="REG_DWORD" Data="0" />
+    </Key>
+    <Key Path="\ControlSet001\Control\Lsa\CentralizedAccessPolicies\CAPEs" />
+    <Key Path="\ControlSet001\Control\Lsa\CentralizedAccessPolicies\CAPs" />
+    <Key Path="\ControlSet001\Control\Lsa\Kerberos" />
+    <Key Path="\ControlSet001\Control\Lsa\Kerberos\Domains" />
+    <Key Path="\ControlSet001\Control\Lsa\Kerberos\HostToRealm" />
+    <Key Path="\ControlSet001\Control\Lsa\Kerberos\Parameters" />
+
+    <!-- Required for LSA to load -->
+    <HostKey Path="\ControlSet001\Control\LsaExtensionConfig" />
+
+    <!-- Nls options https://docs.microsoft.com/en-us/windows/win32/intl/nls-terminology -->
+    <!-- Those values must be present in order for the system to start -->
+    <Key Path="\ControlSet001\Control\Nls\CodePage">
+        <Value Name="ACP" DataType="REG_SZ" Data="1252" />
+        <Value Name="OEMCP" DataType="REG_SZ" Data="437" />
+    </Key>
+
+    <!-- Product options based on the host -->
+    <Key Path="\ControlSet001\Control\ProductOptions">
+        <!-- Copy product type and policy from the host -->
+        <HostValue Name="ProductType" />
+        <HostValue Name="ProductPolicy" />
+        <!-- The product suite doesn't need to be specified -->
+        <Value Name="ProductSuite" DataType="REG_MULTI_SZ" Data="" />
+    </Key>
+    
+    <!-- Security providers -->
+    <HostKey Path="\ControlSet001\Control\SecurityProviders\SaslProfiles" />
+    <HostKey Path="\ControlSet001\Control\SecurityProviders\SCHANNEL" />
+    <HostKey Path="\ControlSet001\Control\SecurityProviders\WDigest" />
+
+    <!-- Services Contorl Manager won't start any services without it -->
+    <HostKey Path="\ControlSet001\Control\ServiceGroupOrder" />
+
+    <!-- Session Manager -->
+    <!-- No need for more than 1 session in a container -->
+    <Key Path="\ControlSet001\Control\Session Manager">
+        <Value Name="NumberOfInitialSessions" DataType="REG_DWORD" Data="1" />
+    </Key>
+
+    <HostKey Path="\ControlSet001\Control\Session Manager\DOS Devices" />
+    <HostKey Path="\ControlSet001\Control\Session Manager\Environment" />
+
+    <!-- Copy known DLLs -->
+    <!-- Not mandatory but can speed up process loading times -->
+    <HostKey Path="\ControlSet001\Control\Session Manager\KnownDLLs" />
+
+    <!-- The key must be present but doesn't need to contain any value -->
+    <Key Path="\ControlSet001\Control\Session Manager\Memory Management" />
+    <HostKey Path="\ControlSet001\Control\Session Manager\SubSystems" />
+
+    <Key Path="\ControlSet001\Hardware Profiles" />
+
+    <!-- Copy services -->
+    <HostKey Path="\ControlSet001\Services\AudioEndpointBuilder" />
+    <HostKey Path="\ControlSet001\Services\Audiosrv" />
+    <HostKey Path="\ControlSet001\Services\BasicDisplay" />
+    <HostKey Path="\ControlSet001\Services\BasicRender" />
+    <HostKey Path="\ControlSet001\Services\BFE" />
+    <HostKey Path="\ControlSet001\Services\condrv" />
+    <HostKey Path="\ControlSet001\Services\CoreMessagingRegistrar" />
+    <HostKey Path="\ControlSet001\Services\CryptSvc" />
+    <HostKey Path="\ControlSet001\Services\DcomLaunch" />
+    <HostKey Path="\ControlSet001\Services\Dfsc" />
+    <HostKey Path="\ControlSet001\Services\Dhcp" />
+    <HostKey Path="\ControlSet001\Services\DiagTrack" />
+    <HostKey Path="\ControlSet001\Services\Dnscache" />
+    <HostKey Path="\ControlSet001\Services\EventLog" />
+    <HostKey Path="\ControlSet001\Services\FontCache" />
+    <HostKey Path="\ControlSet001\Services\gpsvc" />
+    <HostKey Path="\ControlSet001\Services\HTTP" />
+    <HostKey Path="\ControlSet001\Services\LanmanServer" />
+    <HostKey Path="\ControlSet001\Services\LanmanWorkstation" />
+    <HostKey Path="\ControlSet001\Services\LSM" />
+    <HostKey Path="\ControlSet001\Services\mpssvc" />
+    <HostKey Path="\ControlSet001\Services\NetSetupSvc" />
+    <HostKey Path="\ControlSet001\Services\nsi" />
+    <HostKey Path="\ControlSet001\Services\nsiproxy" />
+    <HostKey Path="\ControlSet001\Services\ProfSvc" />
+    <HostKey Path="\ControlSet001\Services\RpcEptMapper" />
+    <HostKey Path="\ControlSet001\Services\RpcSs" />
+    <HostKey Path="\ControlSet001\Services\SamSs" />
+    <HostKey Path="\ControlSet001\Services\storqosflt" />
+    <HostKey Path="\ControlSet001\Services\SystemEventsBroker" />
+    <HostKey Path="\ControlSet001\Services\tcpipreg" />
+    <HostKey Path="\ControlSet001\Services\TrustedInstaller" />
+    <HostKey Path="\ControlSet001\Services\TSDDD" />
+    <HostKey Path="\ControlSet001\Services\UserManager" />
+    <HostKey Path="\ControlSet001\Services\Winmgmt" />
+    <HostKey Path="\ControlSet001\Services\WlanSvc" />
+    <HostKey Path="\ControlSet001\Services\workerdd" />
+
+    <Key Path="\ControlSet001\Services\cexecsvc">
+        <Value Name="DependOnService" DataType="REG_MULTI_SZ" Data="condrv\nProfSvc\nsi" />
+        <Value Name="Description" DataType="REG_SZ" Data="@%systemroot%\system32\cexecsvc.exe,-101" />
+        <Value Name="DisplayName" DataType="REG_SZ" Data="@%systemroot%\system32\cexecsvc.exe,-100" />
+        <Value Name="ErrorControl" DataType="REG_DWORD" Data="1" />
+        <Value Name="ImagePath" DataType="REG_EXPAND_SZ" Data="%systemroot%\system32\cexecsvc.exe" />
+        <Value Name="ObjectName" DataType="REG_SZ" Data="LocalSystem" />
+        <Value Name="ServiceSidType" DataType="REG_DWORD" Data="1" />
+        <Value Name="Start" DataType="REG_DWORD" Data="2" />
+        <Value Name="Type" DataType="REG_DWORD" Data="16" />
+    </Key>
+</Hive>
